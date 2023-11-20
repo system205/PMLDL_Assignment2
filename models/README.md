@@ -1,0 +1,1 @@
+# Trained and serialized model with the final checkpoints/trained weights is stored here
