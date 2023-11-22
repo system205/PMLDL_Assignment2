@@ -1,0 +1,8 @@
+.local
+.jupyter
+.ipython
+.nv
+__pycache__
+.cache
+.vscode
+.history
