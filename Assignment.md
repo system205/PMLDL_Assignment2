@@ -5,6 +5,7 @@
 A recommender system is a type of information filtering system that suggests items or content to users based on their interests, preferences, or past behavior. These systems are commonly used in various domains, such as e-commerce, entertainment, social media, and online content platforms.
 
 Your assignment is to create a recommender system of movies for users:
+
 * Your system should suggest some movies to the user based on user's gemographic information(age, gender, occupation, zip code) and favorite movies (list of movie ids).
 * Solve this task using a machine learning model. You may consider only one model: it will be enough.
 * Create a benchmark that would evaluate the quality of recommendations of your model. Look for commonly used metrics to evaluate a recommender system and use at least one metric.
@@ -18,6 +19,7 @@ Submission should be a link to GitHub repository. It should be open repository, 
 In this assignment you will use [MovieLens 100K dataset](https://grouplens.org/datasets/movielens/100k/) consisting user ratings to movies.
 
 **General information about the dataset:**
+
 * It consists of 100,000 ratings from 943 users on 1682 movies
 * Ratings are ranged from 1 to 5
 * Each user has rated at least 20 movies
@@ -42,7 +44,7 @@ In this assignment you will use [MovieLens 100K dataset](https://grouplens.org/d
 
 The repository should have the following structure:
 
-```
+```md
 movie-recommender-system
 ├── README.md               # The top-level README
 │
@@ -75,7 +77,7 @@ In the `reports` directory create a report about your work. In the report, descr
 
 ### Expected Report Structure
 
-```
+```md
 # Introduction
 ...
 # Data analysis
@@ -105,6 +107,4 @@ Full assignment without any problems is said to be the `100%` solution.
 | Solution building | 40 |  Implementation description, references, final report structure |
 | Final score, evaluation  | 20 | Evaluation function, final score, quality of results |
 
-If **PMLDL Course Team** will have any questions about your assignment or your work fails to show your results you will be called solution defence procedure. 
-
-
+If **PMLDL Course Team** will have any questions about your assignment or your work fails to show your results you will be called solution defence procedure.
