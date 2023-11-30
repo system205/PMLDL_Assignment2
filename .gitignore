@@ -8,3 +8,5 @@ __pycache__
 .history
 
 data/interim
+
+nltk_data
