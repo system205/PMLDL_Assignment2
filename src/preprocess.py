@@ -37,6 +37,7 @@ def preprocess_movies(items_df):
 
     items_df['title'] = items_df['title'].apply(tokenize)
     items_df = pd.concat([items_df, items_df['title'].apply(pd.Series)], axis=1)
+    items_df.columns = items_df.columns.astype(str)
 
     items_df['days_ago'] = scaler.fit_transform(items_df[['days_ago']])
 
@@ -54,7 +55,7 @@ def preprocess_users(users_df):
 
     return users_df
 
-def preprocess_ratings(ratings_df):
+def preprocess_ratings(ratings_df, has_rating):
     ratings_df['timestamp'] = pd.to_datetime(ratings_df['timestamp'], unit='s')
     ratings_df['year'] = ratings_df['timestamp'].dt.year
     ratings_df['month'] = ratings_df['timestamp'].dt.month
@@ -62,7 +63,7 @@ def preprocess_ratings(ratings_df):
 
     ratings_df.drop(columns=['timestamp'], inplace=True)
 
-    ratings_df['rating'] = scaler.fit_transform(ratings_df[['rating']])
+    if has_rating: ratings_df['rating'] = scaler.fit_transform(ratings_df[['rating']])
     ratings_df['year'] = scaler.fit_transform(ratings_df[['year']])
     ratings_df['month'] = scaler.fit_transform(ratings_df[['month']])
     ratings_df['day'] = scaler.fit_transform(ratings_df[['day']])
