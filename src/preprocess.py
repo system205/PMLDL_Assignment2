@@ -55,7 +55,7 @@ def preprocess_users(users_df):
 
     return users_df
 
-def preprocess_ratings(ratings_df, has_rating=False):
+def preprocess_ratings(ratings_df, has_rating=True):
     ratings_df['timestamp'] = pd.to_datetime(ratings_df['timestamp'], unit='s')
     ratings_df['year'] = ratings_df['timestamp'].dt.year
     ratings_df['month'] = ratings_df['timestamp'].dt.month

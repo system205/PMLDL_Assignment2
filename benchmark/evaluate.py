@@ -1,8 +1,11 @@
 '''script that performs evaluation of the final model'''
-
+import sys
+sys.path.append('.')
+import pickle
 import pandas as pd
-from src.data_utils import load_data, merge
-from src.preprocess import preprocess_movies, preprocess_ratings, preprocess_users
+import numpy as np
+from src.data_utils import load_data
+from src.preprocess import preprocess_movies, preprocess_ratings, preprocess_users, merge
 
 
 def combine_with_all_movies(user_id, max_movie=1682, max_time=893286638, exclude_movies=set(), include_movies=None):
@@ -20,7 +23,11 @@ def combine_with_all_movies(user_id, max_movie=1682, max_time=893286638, exclude
 
 # Produce test data
 def get_for_test(base='u1'):
-    '''Returns ready to predict on list of dataframes with the specif user in each combined with possible movies'''
+    '''Returns ready to predict on list of dataframes with the specific user in each combined with possible movies
+    Example: [ Dataframe=['user_id', 'movie_id'] ... ]
+                                1       1
+                                1       2
+                                '''
     users, items, ratings_train = load_data(f'{base}.base')
     users, items, ratings = load_data(f'{base}.test')
 
@@ -87,3 +94,20 @@ def test_recall(base, k=20, liked_rating=4, model=None):
         # print(f"Recall for user {user_id}: {recall:.4f}")
         recalls.append(recall)
     return recalls
+
+
+if __name__ == "__main__":
+    # get base, k, liked_rating from arguments
+    bases = sys.argv[1]
+    k = int(sys.argv[2])
+    liked_rating = int(sys.argv[3] if len(sys.argv) > 3 else 4)
+
+    total_recall = []
+    for base in bases.split(','): 
+        recalls = test_recall(base, k=k, liked_rating=liked_rating, model=pickle.load(open(f'models/{base}.pkl', 'rb')))
+        mean = np.mean(recalls)
+        print(f'Base: {base}. Avg recall: {mean:4f}')
+        total_recall.append(mean)
+
+    print(f'Mean recall on different dataset parts: {np.mean(total_recall):.4f}')
+
